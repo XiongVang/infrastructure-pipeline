@@ -14,5 +14,6 @@ node('linux') {
     stage ('TerminateInstance') {
         sh "aws ec2 wait instance-running --region us-east-1 --instance-ids ${instanceId}"
         sh "aws ec2 terminate-instances --region us-east-1 --instance-ids ${instanceId}"
+        sh "aws ec2 wait instance-terminated --region us-east-1 --instance-ids ${instanceId}"
     }
 }

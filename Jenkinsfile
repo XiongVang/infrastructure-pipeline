@@ -11,6 +11,7 @@ node('linux') {
     }
 
     stage ('TerminateInstance') {
-        echo '${instanceId}'
+        sh "aws ec2 wait instance-running --instance ids ${instanceId}"
+        sh "aws ec2 terminate-instances --instance-ids ${instanceId}"
     }
 }
